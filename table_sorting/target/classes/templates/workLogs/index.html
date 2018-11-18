@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Work Logs</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <link th:href="@{/css/sortingTable.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <h1>Work Logs</h1>
+  <table class="table">
+    <thead>
+    <!-- sortInfoArray[0] = sorting propertiy (e.g: project.customer), sortInfoArray[1] = sorting direction (asc/desc) -->
+    <tr class="sortable" th:with="sortInfoArray =${@pagingAndSortingService.setSortInfoArray(workLogs)}">
+
+      <th data-sort="id"
+          th:classappend="${@pagingAndSortingService.getSortClassName(sortInfoArray, 'id')}">
+        Id
+      </th>
+      <th data-sort="employee"
+          th:classappend="${@pagingAndSortingService.getSortClassName(sortInfoArray, 'employee')}">
+        Employee
+      </th>
+      <th>Description</th>
+      <th data-sort="project.name"
+          th:classappend="${@pagingAndSortingService.getSortClassName(sortInfoArray, 'project.name')}">
+        Project
+      </th>
+      <th data-sort="project.customer"
+          th:classappend="${@pagingAndSortingService.getSortClassName(sortInfoArray, 'project.customer')}">
+        Customer
+      </th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="workLog : ${workLogs}" th:object="${workLog}">
+      <td th:text="*{id}"></td>
+      <td th:text="*{employee}"></td>
+      <td th:text="*{description}"></td>
+      <td th:text="*{project.name}"></td>
+      <td th:text="*{project.customer}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div th:if="${workLogs.totalPages > 0}" class="container text-right">
+
+  <ul class="pagination"
+      th:with="filterParams=${@pagingAndSortingService.buildMultiParamPartUrl(param)}">
+    <li class="page-item" th:classappend="${workLogs.number == 0} ? 'disabled'">
+      <a class="page-link"
+         th:href="@{__${#httpServletRequest.requestURI}__(page=${workLogs.number - 1}, size=${workLogs.size})}+${filterParams}">Previous</a>
+    </li>
+    <li class="page-item" th:classappend="${workLogs.number == (index - 1)} ? 'active'"
+        th:each="index : ${#numbers.sequence(1, workLogs.totalPages)}">
+      <a class="page-link"
+         th:href="@{__${#httpServletRequest.requestURI}__(page=${index - 1}, size=${workLogs.size})}+${filterParams}" th:text="${index}"></a>
+    </li>
+    <li class="page-item" th:classappend="${workLogs.number == (workLogs.totalPages - 1)} ? 'disabled'">
+      <a class="page-link"
+         th:href="@{__${#httpServletRequest.requestURI}__(page=${workLogs.number + 1}, size=${workLogs.size})}+${filterParams}">Next</a>
+    </li>
+  </ul>
+</div>
+</body>
+<script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+
+<script th:src="@{/js/sortingTable.js}"></script>
+
+
+</html>

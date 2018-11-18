@@ -1,0 +1,16 @@
+.sortedASC:after {
+    cursor: pointer;
+    opacity: 0.8;
+    content: '\25B2';
+}
+.sortedDESC:after {
+    cursor: pointer;
+    opacity: 0.8;
+    content: '\25BC';
+}
+
+.notSorted:after {
+    cursor: pointer;
+    opacity: 0.5;
+    content: '\21C5'
+}
