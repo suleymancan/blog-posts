@@ -1,8 +1,6 @@
 package com.suleymancan.table.sorting.workLogs;
 
-import com.suleymancan.table.sorting.model.WorkLog;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @AllArgsConstructor
-@RequestMapping("/workLogs")
+@RequestMapping("/work-logs")
 public class WorkLogController {
 
 	private final WorkLogService workLogService;
