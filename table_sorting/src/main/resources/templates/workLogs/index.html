@@ -15,7 +15,7 @@
   <table class="table">
     <thead>
     <!-- sortInfoArray[0] = sorting propertiy (e.g: project.customer), sortInfoArray[1] = sorting direction (asc/desc) -->
-    <tr class="sortable" th:with="sortInfoArray =${@pagingAndSortingService.setSortInfoArray(workLogs)}">
+    <tr class="sortable" th:with="sortInfoArray = ${@pagingAndSortingService.setSortInfoArray(workLogs)}">
 
       <th data-sort="id"
           th:classappend="${@pagingAndSortingService.getSortClassName(sortInfoArray, 'id')}">

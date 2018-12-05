@@ -15,12 +15,12 @@ import java.util.Map;
 @Service
 public class PagingAndSortingService {
 
-	public String[] setSortInfoArray(final Page<?> page) {
+	public String[] setSortInfoArray(Page<?> page) {
 		final String [] sortInfoArray = page.getSort().toString().split(":");
 		return Arrays.stream(sortInfoArray).map(String::trim).toArray(String[]::new);
 	}
 
-	public String getSortClassName(String [] sortInfoArray, final String propertyName) {
+	public String getSortClassName(final String [] sortInfoArray, final String propertyName) {
 		if (sortInfoArray[0].equals(propertyName)) {
 			return "sorted" + sortInfoArray[1];
 		}

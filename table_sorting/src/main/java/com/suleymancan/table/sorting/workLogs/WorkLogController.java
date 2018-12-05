@@ -21,7 +21,7 @@ public class WorkLogController {
 	private final WorkLogService workLogService;
 
 	@GetMapping
-	public String index(final Model model, final Pageable pageable){
+	public String index(Model model, Pageable pageable){
 		model.addAttribute("workLogs", workLogService.getWorkLogs(pageable));
 		return "workLogs/index";
 	}
